@@ -18,7 +18,7 @@ func main() {
 	internal.InitConfig()
 
 	registry := prometheus.NewRegistry()
-	registry.MustRegister(collector.NewCollector("test"))
+	registry.MustRegister(collector.NewCollector())
 
 	http.Handle(viper.GetString("web.telemetry-path"), promhttp.HandlerFor(registry, promhttp.HandlerOpts{}))
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
