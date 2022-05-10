@@ -15,6 +15,7 @@ main ()
 
     grep -l --exclude='refactor.sh' --exclude-dir='.git' -rn 'prometheus-exporter-template' | xargs -i sed -i "s/prometheus-exporter-template/${NEW_NAME}/g" {}
     mv systemd/prometheus-exporter-template.service systemd/${NEW_NAME}.service
+    mv conf/prometheus-exporter-template.yml conf/${NEW_NAME}.yml
 }
 
 main $1

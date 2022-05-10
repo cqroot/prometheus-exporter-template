@@ -5,14 +5,12 @@ build:
 	@BuildVersion=$$(git describe --tags --abbrev=0); \
 		echo "Build Version: $${BuildVersion}"; \
 		sed -i "s/BuildVersion string = \"[^\"]*\"/BuildVersion string = \"$${BuildVersion}\"/" internal/version.go
-	@CGO_ENABLED=0 go build -o bin/$(EXPORTER_NAME) main.go
+	@mkdir -p $(EXPORTER_NAME)/bin
+	@CGO_ENABLED=0 go build -o $(EXPORTER_NAME)/bin/$(EXPORTER_NAME) main.go
 
 .PHONY: pack
 pack: build
-	mkdir -p $(EXPORTER_NAME)
-	mkdir -p $(EXPORTER_NAME)/bin
-	mkdir -p $(EXPORTER_NAME)/conf
-	cp -r bin conf systemd $(EXPORTER_NAME)/
+	cp -r conf systemd $(EXPORTER_NAME)/
 
 .PHONY: run
 run: pack
