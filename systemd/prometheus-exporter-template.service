@@ -1,0 +1,10 @@
+[Unit]
+Description=prometheus-exporter-template.
+After=syslog.target network.target
+
+[Service]
+Type=simple
+ExecStart=/opt/prometheus-exporter-template/bin/prometheus-exporter-template
+
+[Install]
+WantedBy=multi-user.target
